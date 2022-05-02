@@ -8,8 +8,22 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  pull_request_review:
+    name: Label approved pull requests
 
 jobs:
+
+  labelWhenApproved:
+    name: Label when approved
+    runs-on: ubuntu-latest
+    steps:
+    - name: Label when approved
+      uses: pullreminders/label-when-approved-action@main
+      env:
+        APPROVALS: "1"
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        ADD_LABEL: "approved"
+
   build:
     runs-on: ubuntu-latest
     steps:
